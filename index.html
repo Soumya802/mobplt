@@ -67,14 +67,9 @@
           7:45
         </div>
         <div class="ml-auto flex items-center gap-[6px] text-gray-900 text-sm">
-          <div class="flex items-center gap-[4px]">
-            <div class="relative w-[26px] h-[12px] border border-gray-900 rounded-[3px]">
-              <div class="absolute inset-[2px] bg-gray-900 rounded-[2px]"></div>
-              <div class="absolute -right-[5px] top-1/2 -translate-y-1/2 w-[3px] h-[6px] rounded-[2px] bg-gray-900"></div>
-            </div>
-            <span class="text-[11px] font-semibold bg-gray-900 text-white px-[6px] py-[2px] rounded-[4px]">
-              88
-            </span>
+          <div class="relative w-[26px] h-[12px] border border-gray-900 rounded-[3px]">
+            <div class="absolute inset-[2px] bg-gray-900 rounded-[2px]"></div>
+            <div class="absolute -right-[5px] top-1/2 -translate-y-1/2 w-[3px] h-[6px] rounded-[2px] bg-gray-900"></div>
           </div>
         </div>
       </div>
@@ -205,18 +200,6 @@
           </button>
 
           <button
-            id="decline-btn"
-            class="w-[37px] h-[37px] border border-black/25 rounded-[6px] flex items-center justify-center"
-            aria-label="Decline ride"
-          >
-            <img
-              src="https://www.figma.com/api/mcp/asset/1b9638a6-97ef-4970-8eb5-241e306cf46c"
-              alt="Decline"
-              class="w-5 h-5 opacity-70"
-            />
-          </button>
-
-          <button
             id="accept-btn"
             class="flex-1 bg-[var(--accent-primary)] text-black text-[28px] font-medium py-[14px] rounded-[12px] shadow-md flex items-center justify-center gap-3"
           >
@@ -245,7 +228,6 @@
       const countdownValue = document.getElementById("countdown-value");
       const countdownPill = document.getElementById("countdown-pill");
       const acceptBtn = document.getElementById("accept-btn");
-      const declineBtn = document.getElementById("decline-btn");
       const rideCard = document.getElementById("ride-card");
 
       let timeLeft = 5;
@@ -270,9 +252,6 @@
         rideCard.classList.add("hidden");
       });
 
-      declineBtn.addEventListener("click", () => {
-        rideCard.classList.add("hidden");
-      });
     </script>
   </body>
 </html>
