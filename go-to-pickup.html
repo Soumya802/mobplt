@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go to Pickup Zone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Archivo:wght@400;500;600&family=Roboto:wght@500&family=Kdam+Thmor+Pro:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --accent-primary: #fcb607;
+        --accent-light: #ffdd88;
+        --card-border: #ffca47;
+        --card-bg: #fff5d5;
+        --overlay: rgba(0, 0, 0, 0.45);
+        --online-bg: #fee77f;
+        --online-pill: #bfbfbf;
+        --earnings-bg: #fff0ad;
+        --earnings-border: #fcb607;
+        --earnings-text: #00b100;
+        --status-blue: #2b69ff;
+        --body-font: "Inter", "Archivo", "Roboto", "Kdam Thmor Pro", sans-serif;
+      }
+      body {
+        font-family: var(--body-font);
+        background: #e5e5e5;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              accent: "var(--accent-primary)",
+              "accent-light": "var(--accent-light)",
+              overlay: "var(--overlay)",
+              border: "var(--card-border)",
+            },
+            fontFamily: {
+              sans: "var(--body-font)",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen flex items-center justify-center py-6">
+    <main
+      class="relative w-[440px] h-[956px] overflow-hidden rounded-[32px] shadow-xl bg-white"
+    >
+      <!-- Map background -->
+      <img
+        src="https://www.figma.com/api/mcp/asset/cee98dbd-1314-4f2d-99ca-dcd879935057"
+        alt="Map"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+
+      <!-- Status bar (top) -->
+      <div class="absolute top-4 left-0 right-0 flex items-center px-4">
+        <div
+          class="bg-[var(--status-blue)] text-white text-[13px] font-medium px-4 py-[6px] rounded-full shadow-sm"
+        >
+          7:45
+        </div>
+        <div class="ml-auto flex items-center gap-[10px] text-gray-900 text-sm">
+          <div class="relative w-[26px] h-[12px] border border-gray-900 rounded-[3px]">
+            <div class="absolute inset-[2px] bg-gray-900 rounded-[2px]"></div>
+            <div class="absolute -right-[5px] top-1/2 -translate-y-1/2 w-[3px] h-[6px] rounded-[2px] bg-gray-900"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top controls -->
+      <div class="absolute top-[68px] inset-x-6 flex items-center gap-3">
+        <button
+          class="w-7 h-7 flex items-center justify-center"
+          aria-label="Menu"
+        >
+          <img
+            src="https://www.figma.com/api/mcp/asset/2aa8186f-b1c7-4979-87cb-979a19b843d4"
+            alt="Menu"
+            class="w-6 h-6"
+          />
+        </button>
+
+        <div
+          class="flex items-center gap-3 bg-[var(--online-bg)] px-7 py-[10px] rounded-[10px]"
+        >
+          <span class="text-[23px] text-black font-medium leading-none"
+            >Online</span
+          >
+          <div
+            class="bg-[var(--online-pill)] w-9 h-[43px] rounded-[10px] flex items-center justify-center"
+          >
+            <img
+              src="https://www.figma.com/api/mcp/asset/a1b91c55-3cca-48c6-9b1d-24b573066f12"
+              alt="Pause"
+              class="w-6 h-6"
+            />
+          </div>
+        </div>
+
+        <div
+          class="ml-auto bg-[var(--earnings-bg)] border border-[var(--earnings-border)] px-5 py-[10px] rounded-full"
+        >
+          <span
+            class="text-[20px] font-medium text-[var(--earnings-text)] leading-none"
+            >₹206.69</span
+          >
+        </div>
+      </div>
+
+      <!-- Header bar -->
+      <div class="absolute bg-[#fcb607] h-[72px] left-0 top-[142px] w-full flex items-center px-5">
+        <p class="text-[25px] font-['Metropolis',sans-serif] font-semibold text-black">
+          Go to Pickup Zone
+        </p>
+        <div class="ml-auto flex items-center gap-6">
+          <p class="text-[25px] font-['Archivo',sans-serif] font-semibold text-black opacity-80">
+            Kedar
+          </p>
+          <div id="call-button" class="w-[27px] h-[29px] cursor-pointer" role="button" aria-label="Call rider">
+            <img
+              src="https://www.figma.com/api/mcp/asset/0028c762-c27a-4a64-9612-e67d5c2f96e5"
+              alt="Call"
+              class="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Map markers and path -->
+      <div class="absolute left-0 top-[204px] w-full h-[752px] pointer-events-none">
+        <!-- rotated dashed path -->
+        <div class="absolute left-[126px] top-[406px] w-[82px] h-[133px] rotate-[3.3deg]">
+          <img src="https://www.figma.com/api/mcp/asset/cfd07495-0959-48d8-aa21-5f611bf7a273" alt="Path" class="w-full h-full" />
+        </div>
+        <!-- person marker -->
+        <div class="absolute left-[199px] top-[384px] w-[33px] h-[33px]">
+          <img src="https://www.figma.com/api/mcp/asset/045fee02-57e3-41d7-ada7-1fad14917078" alt="Person" class="w-full h-full object-cover" />
+        </div>
+        <!-- auto marker + blue radius -->
+        <div class="absolute left-[92px] top-[537px] w-[114px] h-[108px]">
+          <img src="https://www.figma.com/api/mcp/asset/73dbdd6e-e6d0-42a4-9776-a3b6ddaf8462" alt="Radius" class="w-full h-full" />
+          <div class="absolute left-[40px] top-[42px] w-[33px] h-[26px] opacity-85">
+            <img src="https://www.figma.com/api/mcp/asset/4c4b11a3-3ebd-4ada-8014-f4a062bef618" alt="Auto" class="w-full h-full object-contain" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Info pills -->
+      <div class="absolute left-[22px] top-[742px] bg-[rgba(147,224,24,0.61)] rounded-[15px] px-[20px] py-[10px] flex items-center gap-[10px]">
+        <div class="w-[18px] h-[25px]">
+          <img src="https://www.figma.com/api/mcp/asset/881f9963-f9ee-4bdf-abac-069e42a689df" alt="Location" class="w-full h-full" />
+        </div>
+        <p id="distance-text" class="text-[30px] leading-[35px] font-['Kdam_Thmor',sans-serif] tracking-[0.1px] text-black">650 m</p>
+      </div>
+      <div class="absolute left-[276px] top-[742px] bg-[rgba(255,0,0,0.5)] rounded-[15px] px-[20px] py-[10px] flex items-center gap-[10px]">
+        <div class="w-[32px] h-[29px]">
+          <img src="https://www.figma.com/api/mcp/asset/fbb30ab8-af97-4b25-839b-1974ab58cf99" alt="Clock" class="w-full h-full object-contain" />
+        </div>
+        <p id="eta-text" class="text-[30px] leading-[35px] font-['Kdam_Thmor',sans-serif] tracking-[0.1px] text-black">1:03</p>
+      </div>
+
+      <!-- Primary CTA -->
+      <div class="absolute left-1/2 top-[826px] -translate-x-1/2">
+        <a
+          href="#"
+          id="arrived-btn"
+          class="relative bg-[var(--accent-primary)] w-[306px] h-[65px] rounded-[12px] shadow-md flex items-center justify-center overflow-hidden select-none"
+          aria-label="Arrived"
+        >
+          <span
+            id="arrived-shimmer"
+            class="absolute inset-0 opacity-60 bg-gradient-to-r from-[rgba(255,230,120,0.3)] via-[rgba(252,182,7,0.9)] to-[rgba(255,230,120,0.3)] translate-x-[-100%]"
+            aria-hidden="true"
+          ></span>
+          <span class="text-[28px] font-medium text-black leading-[36px] relative" id="arrived-label">Arrived</span>
+        </a>
+      </div>
+
+      <!-- Bottom handle -->
+      <div class="absolute bottom-4 inset-x-0 flex justify-center">
+        <div class="h-[4px] w-[108px] bg-[#1d1b20] rounded-full"></div>
+      </div>
+    </main>
+    <script>
+      // Dynamic distance/time updates every 30s (simulated)
+      const distanceEl = document.getElementById("distance-text");
+      const etaEl = document.getElementById("eta-text");
+      const arrivedBtn = document.getElementById("arrived-btn");
+      const arrivedLabel = document.getElementById("arrived-label");
+      const shimmer = document.getElementById("arrived-shimmer");
+      const callBtn = document.getElementById("call-button");
+
+      let distanceMeters = 650;
+      let etaSeconds = 63; // 1:03
+      let arrived = false;
+
+      const formatDistance = (m) => `${Math.max(m, 0)} m`;
+      const formatEta = (s) => {
+        const clamped = Math.max(s, 0);
+        const min = Math.floor(clamped / 60);
+        const sec = clamped % 60;
+        return `${min}:${sec.toString().padStart(2, "0")}`;
+      };
+
+      function updateDisplays() {
+        distanceEl.textContent = formatDistance(distanceMeters);
+        etaEl.textContent = formatEta(etaSeconds);
+      }
+
+      function enableArrived() {
+        arrived = true;
+        arrivedBtn.classList.remove("opacity-60", "cursor-not-allowed", "pointer-events-none");
+        shimmer.classList.add("animate-[shimmer_2s_linear_infinite]");
+      }
+
+      // Initialize disabled state and shimmer motion when enabled
+      arrivedBtn.classList.add("opacity-60", "cursor-not-allowed", "pointer-events-none");
+      updateDisplays();
+
+      const interval = setInterval(() => {
+        if (arrived) return;
+        distanceMeters = Math.max(distanceMeters - 80, 0);
+        etaSeconds = Math.max(etaSeconds - 15, 0);
+        updateDisplays();
+        if (distanceMeters <= 50 || etaSeconds <= 0) {
+          enableArrived();
+          clearInterval(interval);
+        }
+      }, 30000); // every 30s
+
+      arrivedBtn.addEventListener("click", (e) => {
+        if (!arrived) {
+          e.preventDefault();
+          return;
+        }
+        // placeholder for next navigation when driver arrives
+        alert("Arrived at pickup");
+      });
+
+      if (callBtn) {
+        callBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          // placeholder for future calling screen
+          alert("Calling rider...");
+        });
+      }
+
+      // Shimmer keyframes
+      const styleEl = document.createElement("style");
+      styleEl.textContent = `
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      `;
+      document.head.appendChild(styleEl);
+    </script>
+  </body>
+</html>
+
