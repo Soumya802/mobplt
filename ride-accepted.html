@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ride Accepted</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Archivo:wght@400;500&family=Roboto:wght@500&family=Kdam+Thmor+Pro:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --accent-primary: #fcb607;
+        --accent-light: #ffdd88;
+        --card-border: #ffca47;
+        --card-bg: #fff5d5;
+        --overlay: rgba(0, 0, 0, 0.45);
+        --online-bg: #fee77f;
+        --online-pill: #bfbfbf;
+        --earnings-bg: #fff0ad;
+        --earnings-border: #fcb607;
+        --earnings-text: #00b100;
+        --status-blue: #2b69ff;
+        --body-font: "Inter", "Archivo", "Roboto", "Kdam Thmor Pro", sans-serif;
+      }
+      body {
+        font-family: var(--body-font);
+        background: #e5e5e5;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              accent: "var(--accent-primary)",
+              "accent-light": "var(--accent-light)",
+              overlay: "var(--overlay)",
+              border: "var(--card-border)",
+            },
+            fontFamily: {
+              sans: "var(--body-font)",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen flex items-center justify-center py-6">
+    <main
+      class="relative w-[440px] h-[956px] overflow-hidden rounded-[32px] shadow-xl bg-white"
+    >
+      <!-- Map background -->
+      <img
+        src="https://www.figma.com/api/mcp/asset/8f5b7a24-0e40-477c-89e3-fc25cf1ac9fe"
+        alt="Map"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <!-- Semi-transparent overlay -->
+      <div class="absolute inset-[132px_0_0] bg-[var(--overlay)]"></div>
+
+      <!-- Status bar (top) -->
+      <div class="absolute top-4 left-0 right-0 flex items-center px-4">
+        <div
+          class="bg-[var(--status-blue)] text-white text-[13px] font-medium px-4 py-[6px] rounded-full shadow-sm"
+        >
+          7:45
+        </div>
+        <div class="ml-auto flex items-center gap-[10px] text-gray-900 text-sm">
+          <div class="flex items-center gap-[4px]">
+            <div class="relative w-[26px] h-[12px] border border-gray-900 rounded-[3px]">
+              <div class="absolute inset-[2px] bg-gray-900 rounded-[2px]"></div>
+              <div class="absolute -right-[5px] top-1/2 -translate-y-1/2 w-[3px] h-[6px] rounded-[2px] bg-gray-900"></div>
+            </div>
+            <span class="text-[11px] font-semibold bg-gray-900 text-white px-[6px] py-[2px] rounded-[4px]">
+              88
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top controls -->
+      <div class="absolute top-[68px] inset-x-6 flex items-center gap-3">
+        <button
+          class="w-7 h-7 flex items-center justify-center"
+          aria-label="Menu"
+        >
+          <img
+            src="https://www.figma.com/api/mcp/asset/db93997c-9e2e-4ce7-aa73-40120c47c363"
+            alt="Menu"
+            class="w-6 h-6"
+          />
+        </button>
+
+        <div
+          class="flex items-center gap-3 bg-[var(--online-bg)] px-7 py-[10px] rounded-[10px]"
+        >
+          <span class="text-[23px] text-black font-medium leading-none"
+            >Online</span
+          >
+          <div
+            class="bg-[var(--online-pill)] w-9 h-[43px] rounded-[10px] flex items-center justify-center"
+          >
+            <img
+              src="https://www.figma.com/api/mcp/asset/ddc7bc2e-b541-45d8-9163-6dd6b23b314f"
+              alt="Pause"
+              class="w-6 h-6"
+            />
+          </div>
+        </div>
+
+        <div
+          class="ml-auto bg-[var(--earnings-bg)] border border-[var(--earnings-border)] px-5 py-[10px] rounded-full"
+        >
+          <span
+            class="text-[20px] font-medium text-[var(--earnings-text)] leading-none"
+            >₹206.69</span
+          >
+        </div>
+      </div>
+
+      <!-- Pulsing location overlay (optional to mirror Figma highlight) -->
+      <div
+        class="absolute left-[120px] top-[360px] w-[120px] h-[120px] bg-[#3b82f6]/20 rounded-full"
+      ></div>
+
+      <!-- Ride accepted card -->
+      <section
+        class="absolute left-1/2 top-[599px] -translate-x-1/2 w-[383px] bg-[var(--card-bg)] border border-[var(--card-border)] rounded-[8px] shadow-md px-6 pt-6 pb-8"
+      >
+        <div class="space-y-2">
+          <p class="text-[40px] leading-[44px] text-black font-['Kdam_Thmor_Pro',sans-serif]">
+            Ride Accepted
+          </p>
+          <p class="text-[20px] leading-[24px] text-black font-['Kdam_Thmor_Pro',sans-serif]">
+            Customer Verified Location
+          </p>
+        </div>
+
+        <div class="mt-5 flex items-start gap-3">
+          <img
+            src="https://www.figma.com/api/mcp/asset/55b24c83-fabd-4f78-bb1b-959028837134"
+            alt="Location"
+            class="w-5 h-5 opacity-80 mt-1"
+          />
+          <div>
+            <p class="text-[35px] leading-[40px] text-black font-normal">0.4 KM</p>
+            <p class="text-[18px] leading-[26px] text-[#444] font-normal">
+              <span class="font-semibold text-black">LT 3</span>
+              <span class="font-normal">
+                : IIT (BHU), Varanasi, Varanasi, 221005, UP, India
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-8 flex justify-center">
+          <a
+            href="#"
+            class="bg-[var(--accent-primary)] text-black text-[28px] font-medium px-10 py-[14px] rounded-[66px] shadow-md"
+            aria-label="Go to pickup"
+          >
+            Go to pickup
+          </a>
+        </div>
+      </section>
+
+      <!-- Bottom handle -->
+      <div class="absolute bottom-4 inset-x-0 flex justify-center">
+        <div class="h-[4px] w-[108px] bg-[#1d1b20] rounded-full"></div>
+      </div>
+    </main>
+  </body>
+</html>
+
