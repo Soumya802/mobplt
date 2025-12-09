@@ -1,2 +1,275 @@
-# mobplt
-driver app 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Driver Ride Request</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Archivo:wght@400;500&family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --accent-primary: #fcb607;
+        --accent-light: #ffdd88;
+        --card-border: #949494;
+        --overlay: rgba(0, 0, 0, 0.45);
+        --earnings-bg: #fff0ad;
+        --earnings-border: #fcb607;
+        --earnings-text: #00b100;
+        --online-bg: #fee77f;
+        --online-pill: #bfbfbf;
+        --status-blue: #2b69ff;
+        --body-font: "Inter", "Archivo", "Roboto", "Metropolis", sans-serif;
+      }
+      body {
+        font-family: var(--body-font);
+        background: #e5e5e5;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              accent: "var(--accent-primary)",
+              "accent-light": "var(--accent-light)",
+              overlay: "var(--overlay)",
+              border: "var(--card-border)",
+            },
+            fontFamily: {
+              sans: "var(--body-font)",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen flex items-center justify-center py-6">
+    <main
+      class="relative w-[440px] h-[956px] overflow-hidden rounded-[32px] shadow-xl bg-white"
+    >
+      <!-- Map background -->
+      <img
+        src="https://www.figma.com/api/mcp/asset/e3e32dce-54a8-412e-bc67-e111a9f9cbca"
+        alt="Map"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <!-- Semi-transparent overlay -->
+      <div class="absolute inset-[132px_0_0] bg-[var(--overlay)]"></div>
+
+      <!-- Status bar (top) -->
+      <div class="absolute top-4 left-0 right-0 flex items-center px-4">
+        <div
+          class="bg-[var(--status-blue)] text-white text-sm font-medium px-4 py-1 rounded-full"
+        >
+          7:45
+        </div>
+        <div class="ml-auto flex items-center gap-2 text-gray-900 text-sm">
+          <span class="w-4 h-3 bg-gray-900 rounded-sm"></span>
+          <span class="w-4 h-4 border border-gray-900 rounded-sm"></span>
+          <span class="text-xs font-semibold bg-gray-900 text-white px-1 rounded">
+            88
+          </span>
+        </div>
+      </div>
+
+      <!-- Top controls -->
+      <div class="absolute top-[68px] inset-x-6 flex items-center gap-3">
+        <button
+          class="w-7 h-7 flex items-center justify-center"
+          aria-label="Menu"
+        >
+          <img
+            src="https://www.figma.com/api/mcp/asset/97a1ec72-7f60-479b-b822-267958592b22"
+            alt="Menu"
+            class="w-6 h-6"
+          />
+        </button>
+
+        <div
+          class="flex items-center gap-2 bg-[var(--online-bg)] px-6 py-2 rounded-[10px]"
+        >
+          <span class="text-[23px] text-black font-medium leading-none"
+            >Online</span
+          >
+          <div
+            class="bg-[var(--online-pill)] w-9 h-[43px] rounded-[10px] flex items-center justify-center"
+          >
+            <img
+              src="https://www.figma.com/api/mcp/asset/003933f0-d8c8-4269-973d-f41be0fcd709"
+              alt="Pause"
+              class="w-6 h-6"
+            />
+          </div>
+        </div>
+
+        <div
+          class="ml-auto bg-[var(--earnings-bg)] border border-[var(--earnings-border)] px-4 py-2 rounded-full"
+        >
+          <span
+            class="text-[20px] font-medium text-[var(--earnings-text)] leading-none"
+            >₹206.69</span
+          >
+        </div>
+      </div>
+
+      <!-- Ride request card -->
+      <section
+        id="ride-card"
+        class="absolute left-1/2 top-[184px] -translate-x-1/2 w-[383px] bg-white border border-[var(--card-border)] rounded-[8px] shadow-md"
+      >
+        <div class="text-center pt-6 pb-2">
+          <p class="text-[22px] font-semibold tracking-[0.1px] text-black">
+            Ride Request
+          </p>
+        </div>
+
+        <!-- Fare & seats -->
+        <div class="flex items-center justify-center gap-3 px-6 mt-2">
+          <div
+            class="bg-[var(--accent-light)] px-6 py-3 rounded-[6px] text-[40px] font-medium text-[rgba(0,0,0,0.81)]"
+          >
+            ₹60
+          </div>
+          <div
+            class="bg-[var(--accent-light)] px-6 py-3 rounded-[6px] flex items-center gap-2 text-[40px] font-medium text-[rgba(0,0,0,0.81)]"
+          >
+            <img
+              src="https://www.figma.com/api/mcp/asset/7bae64c3-1cb4-4469-91cb-322761387c9b"
+              alt="Passengers"
+              class="w-6 h-6 opacity-80"
+            />
+            5
+          </div>
+        </div>
+
+        <!-- Pickup -->
+        <div class="relative px-8 mt-6">
+          <div class="absolute left-4 top-1 opacity-80">
+            <img
+              src="https://www.figma.com/api/mcp/asset/b3943a8e-3fdc-4cc0-a8a0-b394f28e12fd"
+              alt="Origin"
+              class="w-5 h-5"
+            />
+          </div>
+          <div class="pl-8">
+            <p class="text-[35px] font-medium text-black leading-tight">
+              0.4 KM
+            </p>
+            <p class="text-[18px] text-[#444] leading-[26px]">
+              <span class="font-semibold text-black">LT 3</span>
+              <span class="font-normal">
+                : IIT (BHU), Varanasi, Varanasi, 221005, UP, India
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="px-10 mt-3 flex">
+          <img
+            src="https://www.figma.com/api/mcp/asset/18a4727d-bee8-4f9c-82d5-436a3d291276"
+            alt="Divider"
+            class="h-16 opacity-70"
+          />
+        </div>
+
+        <!-- Dropoff -->
+        <div class="relative px-8 mt-1">
+          <div class="absolute left-4 top-1 opacity-80">
+            <img
+              src="https://www.figma.com/api/mcp/asset/7b21fdcf-3287-4cd0-9332-03635dd71648"
+              alt="Destination"
+              class="w-5 h-5"
+            />
+          </div>
+          <div class="pl-8">
+            <p class="text-[35px] font-medium text-black leading-tight">
+              2.4 KM
+            </p>
+            <p class="text-[18px] text-[#444] leading-[26px]">
+              <span class="font-semibold text-black">Aryabhatta Hostel</span>
+              <span class="font-normal">
+                : IIT (BHU), Varanasi, Varanasi, 221005, UP, India
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-4 px-6 py-6">
+          <button
+            id="decline-btn"
+            class="w-[37px] h-[37px] border border-black/25 rounded-[6px] flex items-center justify-center"
+            aria-label="Decline ride"
+          >
+            <img
+              src="https://www.figma.com/api/mcp/asset/1b9638a6-97ef-4970-8eb5-241e306cf46c"
+              alt="Decline"
+              class="w-5 h-5 opacity-70"
+            />
+          </button>
+
+          <button
+            id="accept-btn"
+            class="flex-1 bg-[var(--accent-primary)] text-black text-[28px] font-medium py-3 rounded-[12px] shadow-md flex items-center justify-center gap-3"
+          >
+            Accept
+            <span
+              id="countdown-pill"
+              class="relative w-10 h-10 grid place-items-center text-[22px] font-semibold text-black"
+            >
+              <span
+                class="absolute inset-0 rounded-full bg-white border border-black/40 opacity-80"
+              ></span>
+              <span id="countdown-value" class="relative">5</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Bottom handle -->
+      <div class="absolute bottom-4 inset-x-0 flex justify-center">
+        <div class="h-1 w-28 bg-[#1d1b20] rounded-full"></div>
+      </div>
+    </main>
+
+    <script>
+      const countdownValue = document.getElementById("countdown-value");
+      const countdownPill = document.getElementById("countdown-pill");
+      const acceptBtn = document.getElementById("accept-btn");
+      const declineBtn = document.getElementById("decline-btn");
+      const rideCard = document.getElementById("ride-card");
+
+      let timeLeft = 5;
+      let timer = setInterval(() => {
+        timeLeft -= 1;
+        countdownValue.textContent = Math.max(timeLeft, 0);
+
+        // simple progress ring effect
+        const progress = Math.max(timeLeft, 0) / 5;
+        countdownPill.style.background = `conic-gradient(var(--accent-primary) ${
+          progress * 360
+        }deg, #fff ${progress * 360}deg)`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          acceptBtn.disabled = true;
+          acceptBtn.classList.add("opacity-60", "cursor-not-allowed");
+        }
+      }, 1000);
+
+      acceptBtn.addEventListener("click", () => {
+        if (acceptBtn.disabled) return;
+        clearInterval(timer);
+        alert("Ride accepted");
+      });
+
+      declineBtn.addEventListener("click", () => {
+        rideCard.classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>
